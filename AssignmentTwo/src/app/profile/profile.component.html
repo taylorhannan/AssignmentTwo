@@ -1,0 +1,23 @@
+<div id="profile">
+  <h2>Profile Dashboard</h2>
+<div id="profile">
+  <h3>{{username}}'s Profile</h3>
+  <div>
+      <p>Username</p>
+      <p class="details">{{username}}</p>
+      <p>Email</p>
+      <p class="details">{{email}}</p>
+      <p>Role</p>
+      <p class="details">{{role}}</p>
+      <p>Display Image</p>
+      <img width="300px" height="300px" src="http://localhost:3000/images/{{imagepath}} "/>
+      <br><br>
+      <p>Upload New Image</p>
+      <form>
+        <input type="file" (change)="onFileSelected($event)" name="uploadfile"/>
+        <br>
+        <br>
+        <button type="submit" (click)="onUpload()">Upload Image</button>
+      </form>
+  </div>
+</div>

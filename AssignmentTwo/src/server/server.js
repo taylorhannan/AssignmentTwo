@@ -7,10 +7,16 @@ var io = socketIO(server);
 var fs = require('fs');
 var cors = require('cors');
 var bodyParser = require('body-parser');
-
 app.use(bodyParser.json());
 app.use(cors());
 const port = process.env.PORT || 3000;
+
+const path = require('path');
+const formidable = require('formidable');
+app.use(express.static(path.join(__dirname , '../dist/WeekSix')))
+app.use('/images',express.static(path.join(__dirname, './images')));
+require('./routes/upload.js')(app,formidable);
+
 
 require('./socket.js')(app, io);
 

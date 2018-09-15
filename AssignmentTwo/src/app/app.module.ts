@@ -9,10 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 // for http
 import { SocketService } from './socket.service';
+import { ImguploadService } from './imgupload.service';
 import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
 import { NavComponent } from './nav/nav.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
 // for created service
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     ChatComponent,
     NavComponent,
     AdminComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [SocketService],
+  providers: [SocketService, ImguploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
