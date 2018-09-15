@@ -15,10 +15,7 @@ const path = require('path');
 const formidable = require('formidable');
 app.use(express.static(path.join(__dirname , '../dist/WeekSix')))
 app.use('/images',express.static(path.join(__dirname, './images')));
-require('./routes/upload.js')(app,formidable);
 
-
-require('./socket.js')(app, io);
 
 // Boots up the server using http
 server.listen(3000, () => {
@@ -49,7 +46,7 @@ MongoClient.connect(url, {poolSize:10}, function(err, client) {
 					dbo.createCollection("users", function(err, res) {
 						if (err) throw err;
 						console.log("Collection users created!");
-						var initialUser = { name: "super", email: "super@admin.com", role:"superAdmin" };
+						var initialUser = { name: "super", email: "super@admin.com", role:"superAdmin", imagepath:"super.jpg" };
 						// Insert initial user into collection 'users' on startup
 						dbo.collection("users").insertOne(initialUser, function(err, res) {
     					if (err) throw err;
@@ -86,5 +83,8 @@ MongoClient.connect(url, {poolSize:10}, function(err, client) {
 		require('./routes/groupdel.js')(app, db);
 		require('./routes/users.js')(app, db);
 		require('./routes/groups.js')(app, db);
+		require('./routes/userimage.js')(app, db);
+		require('./routes/upload.js')(app,formidable);
+		require('./socket.js')(app, io);
 	});
 });

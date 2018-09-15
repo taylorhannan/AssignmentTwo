@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../socket.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-chat',
@@ -12,8 +13,10 @@ export class ChatComponent implements OnInit {
 	messages = [];
 	message;
 	connection;
+	imagepath = '';
+	username:string = '';
 
-	constructor(private socketService: SocketService, private router: Router) {}
+	constructor(private socketService: SocketService, private router: Router, private http: HttpClient) {}
 
 	ngOnInit() {
     // Gets messages sent and subscribes to node.js socket server, checks for logged in user
@@ -27,17 +30,34 @@ export class ChatComponent implements OnInit {
 			alert("You are not logged in!")
 			this.router.navigateByUrl('');
 		}
+
+		this.username = sessionStorage.username;
+
+		const req = this.http.post('http://localhost:3000/api/users', {})
+			.subscribe((data: any) => {
+					if (data.userData) {
+						this.imagepath = data.userData[0].imagepath;
+						console.log(this.imagepath);
+					} else {
+						alert('Error!');
+						return;
+					}
+				},
+				err => {
+					alert('An error has occured trying to get user image.')
+					console.log("Error occured");
+					return;
+				});
 	}
 
 	sendMessage() {
 		// Pushes message to socketService & logs datetime + user who sent the message.
 		let date = new Date();
-		let username = JSON.stringify(sessionStorage.username);
 		//let usernamestr = username.replace(/\"/g, ""));
 		if (this.message == null || this.message === "") {
 			alert('You must enter a message to send something!');
 		} else {
-			this.socketService.sendMessage(this.message + ' (' + username + ') - Sent at ' + date.getHours() + ':' + date.getMinutes());
+			this.socketService.sendMessage(this.message + ' (' + this.username + ') - Sent at ' + date.getHours() + ':' + date.getMinutes());
 			this.message = "";
 		}
 	}

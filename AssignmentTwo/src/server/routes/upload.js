@@ -22,7 +22,7 @@ module.exports = function(app, formidable){
         result: "OK",
         data:{'filename':file.name, 'size':file.size},
         numberOfImages:1,
-        message:"Upload successfull"
+        message:"Upload successful"
       });
     });
 

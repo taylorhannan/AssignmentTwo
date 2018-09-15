@@ -3,7 +3,8 @@
   <div id ="messages">
     <ng-container *ngFor="let message of messages">
       <div id="message">
-        {{message.text}}
+       <img width="25px" height="25px" src="http://localhost:3000/images/{{imagepath}} "/>
+       {{message.text}}
       </div>
     </ng-container>
   </div>
