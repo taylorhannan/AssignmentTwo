@@ -44,10 +44,11 @@ export class HomeComponent implements OnInit {
 							sessionStorage.setItem("role", data.role);
 						} else {
 							alert('Username/Email incorrect!')
+							console.log(data);
 						}
 					},
 					err => {
-						alert('An error has occured trying to create user.')
+						alert('An error has occured trying to log in.')
 						console.log("Error occured");
 						return;
 					});
