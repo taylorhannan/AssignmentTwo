@@ -1,8 +1,8 @@
-# Assignment 1 3813ICT
+# Assignment 2 3813ICT
 ### Developed by Taylor Hannan
 
 ## Git Layout
-The approach taken for version control was done by using frequent commits of an *error free* state of the project. This is done by frequent testing of all added features & functions. Thus, there was no use for branches aside from the master branch. A second branch will be added for Assignment 2, however. The layout of the git is fairly simple, a README and the AssignmentOne folder. Through that there is the Angular files, as well as the server folder located under *./src/server*, which is where the mongoDB is run, the node.js socket files, and the node.js server/API files are hosted.
+The approach taken for version control was done by using frequent commits of an *error free* state of the project. This is done by frequent testing of all added features & functions. Thus, there was no use for branches aside from the master branch. The layout of the git is fairly simple, a README and the AssignmentTwo folder. Through that there is the Angular files, as well as the server folder located under *./src/server*, which is where the MongoDB is run, the node.js socket files, and the node.js server/API files are hosted.
 
 ## Main Data Structures
 //
@@ -79,3 +79,17 @@ This route is used for image uploads. It takes the form data sent from the *imgu
 
 #### /api/userimage
 This route is used in conjunction with */api/upload*, as both requests to these routes are sent at the same time. This route is used to update the logged in User's profile image by sending the new image link (found in */api/upload*) and updates the User's MongoDB document by appending the new image location.
+
+## Testing AssignmentTwo
+### How To Test
+To test Assignment 2, you must first cd into the following directory:
+```
+.\AssignmentTwo\AssignmentTwo\src\server>
+```
+Ensure both the *Angular Server* and *node.js* Server are running.
+After this, you must then run the command:
+```
+npm test
+```
+
+The tests will then proceed to run and return their intended responses.
