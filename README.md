@@ -5,7 +5,7 @@
 The approach taken for version control was done by using frequent commits of an *error free* state of the project. This is done by frequent testing of all added features & functions. Thus, there was no use for branches aside from the master branch. The layout of the git is fairly simple, a README and the AssignmentTwo folder. Through that there is the Angular files, as well as the server folder located under *./src/server*, which is where the MongoDB is run, the node.js socket files, and the node.js server/API files are hosted.
 
 ## Main Data Structures
-###Users###
+### Users
 Users are represented by using MongoDB items, and are represented their string value. The item is grabbed from the database by matching their string to the name under the 'name' parameter of the MongoDB "users" collection. All user data is held in the "users" collection, which is created upon startup of the server. There is originally only one user in this collection, called 'super'. Each user has four attributes in it's entry in the database:
 + name - the username of the user
 + email - the email of the user
@@ -14,12 +14,13 @@ Users are represented by using MongoDB items, and are represented their string v
 
 Each user **must** have one of each of these parameters, or it is not a valid user.
 
-###Groups###
+### Groups
 Groups are represented by using MongoDB items, and are represented their string value. The item is grabbed from the database by matching their string to the name under the 'name' parameter of the MongoDB "groups" collection. All group data is held in the "groups" collection, which is created upon startup of the server. There is originally only one group in this collection, called 'Group1'. Each group has one attribute in it's entry in the database:
 + name - the name of the group
 
 Each group **must** have this parameter, or it is not a valid group. It was originally planned that the group was intended to have another parameter called "users", which would be an object containing all users inside of a group, but due to development constraints this was never implemented.
 
+### Data Diagram
 The data structure is as follows:
 
 ![alt text](https://i.imgur.com/yfqrVQL.png "Data Structure Image")
