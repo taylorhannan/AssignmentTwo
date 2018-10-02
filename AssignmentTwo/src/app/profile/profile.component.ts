@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
 
 
     const req = this.http.post('http://localhost:3000/api/user', {
+      // Get logged in user's data
       username: this.username
     })
       .subscribe((data: any) => {
@@ -49,11 +50,13 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileSelected(event){
+    // Send image name to onUpload
     console.log(event);
     this.selectedfile = event.target.files[0];
   }
 
   onUpload(){
+    // Upload user image
     const fd = new FormData();
     fd.append('image',this.selectedfile,this.selectedfile.name);
     this.imguploadService.imgupload(fd).subscribe(res=>{

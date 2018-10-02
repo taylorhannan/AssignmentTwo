@@ -36,11 +36,8 @@ MongoClient.connect(url, {poolSize:10}, function(err, client) {
 		if (err) throw err;
 		var dbo = db.db("mydb");
 
-		// Drop collection 'users' on server startup
-		if (dbo.collection("users")){
-			dbo.collection("users").drop(function(err, delOK) {
-		    if (err) throw err;
-				if (delOK){
+		// Check collection 'users' on server startup
+		if (!dbo.collection("users")){
 					console.log("Dropped collection users!");
 					// Create collection 'users' on server startup
 					dbo.createCollection("users", function(err, res) {
@@ -53,14 +50,9 @@ MongoClient.connect(url, {poolSize:10}, function(err, client) {
 							console.log("Inserted initial user", initialUser.name);
 						});
 					});
-				}
-			});
 		}
-		// Drop collection 'groups' on server startup
-		if (dbo.collection("groups")){
-			dbo.collection("groups").drop(function(err, delOK) {
-				if (err) throw err;
-				if (delOK){
+		// Check collection 'groups' on server startup
+		if (!dbo.collection("groups")){
 					console.log("Dropped collection groups!");
 					// Create collection 'users' on itial server startup
 					dbo.createCollection("groups", function(err, res) {
@@ -73,8 +65,6 @@ MongoClient.connect(url, {poolSize:10}, function(err, client) {
 							console.log("Inserted initial group", initialGroup.name);
 						});
 					});
-				}
-			});
 		}
 		require('./routes/auth.js')(app, db);
 		require('./routes/reg.js')(app, db);
