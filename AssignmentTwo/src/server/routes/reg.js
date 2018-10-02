@@ -10,7 +10,7 @@ module.exports = function(app, db){
   	console.log(username);
 
     MongoClient.connect(url, function(err, db) {
-      var insertUser = { "name": username, "email": email, "role": role };
+      var insertUser = { "name": username, "email": email, "role": role, "imagepath": "default.jpg"};
       var dbo = db.db("mydb");
 
       dbo.collection("users").find({ "name": username }).toArray(function(err, result){
@@ -37,7 +37,7 @@ module.exports = function(app, db){
         });
       }else{
         res.send({'success':false});
-        db.close();  
+        db.close();
       }
     });
     });

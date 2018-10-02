@@ -5,7 +5,24 @@
 The approach taken for version control was done by using frequent commits of an *error free* state of the project. This is done by frequent testing of all added features & functions. Thus, there was no use for branches aside from the master branch. The layout of the git is fairly simple, a README and the AssignmentTwo folder. Through that there is the Angular files, as well as the server folder located under *./src/server*, which is where the MongoDB is run, the node.js socket files, and the node.js server/API files are hosted.
 
 ## Main Data Structures
-//
+###Users###
+Users are represented by using MongoDB items, and are represented their string value. The item is grabbed from the database by matching their string to the name under the 'name' parameter of the MongoDB "users" collection. All user data is held in the "users" collection, which is created upon startup of the server. There is originally only one user in this collection, called 'super'. Each user has four attributes in it's entry in the database:
++ name - the username of the user
++ email - the email of the user
++ role - the role of the user
++ image - the image of the user
+
+Each user **must** have one of each of these parameters, or it is not a valid user.
+
+###Groups###
+Groups are represented by using MongoDB items, and are represented their string value. The item is grabbed from the database by matching their string to the name under the 'name' parameter of the MongoDB "groups" collection. All group data is held in the "groups" collection, which is created upon startup of the server. There is originally only one group in this collection, called 'Group1'. Each group has one attribute in it's entry in the database:
++ name - the name of the group
+
+Each group **must** have this parameter, or it is not a valid group. It was originally planned that the group was intended to have another parameter called "users", which would be an object containing all users inside of a group, but due to development constraints this was never implemented.
+
+The data structure is as follows:
+
+![alt text](https://i.imgur.com/yfqrVQL.png "Data Structure Image")
 
 ## Angular Architecture
 ### Components
@@ -51,15 +68,19 @@ There was no definitive models used in this project, as it was more efficient to
 The 'auth' route is used to authorise users upon sign-in. It does so by taking the parameters *username* & *email* from the login form on the homepage. It then checks for an existing match of username & email in the MongoDB; if there is a match, it allows access - returning true. The returned data is the username, email, and role from the MongoDB, as well as success equaling true. If there is no match found, the response to Angular is the success criteria being false.
 
 #### /api/reg
-This route is used to manage user registration. It does so by taking the following parameters entered on the user registration form on the AdminComponent: *username*,  *email*, and *role*. When these parameters are received, it checks to see if there is already a match for username or a match for email (no two users can share the same username or email). If no match is found, it then writes the new user with the parameters it was sent from Angular to MongoDB and returns the parameters entered with the success parameter equaling *true*.
+This route is used to manage user registration. It does so by taking the following parameters entered on the user registration form on the AdminComponent: *username*,  *email*, and *role*. When these parameters are received, it checks to see if there is already a match for username or a match for email (no two users can share the same username or email). If no match is found, it then writes the new user with the parameters it was sent from Angular to MongoDB and returns the parameters entered with the success parameter equaling *true*. All created users have the same default image until changed.
 
 #### /api/del
 To delete a user, this route must be used. It takes the parameter of the user's name, before reading for the match of the user name in the MongoDB database. It then deletes the associated *email* & *role*, as well as the username specified. If no match for username is found, it returns *success* as *false*. If the deletion was successful, MongoDB removes the document from it's database and returns the *username* & *success* equaling true.
 
 
 #### /api/users
-This route is only used to get data from the User JSON database to display the list of current users in an options loop of the admin component. When data is sent to the route, it returns the variable *userData* which is the contents of the *user* collection from MongoDB.
+This route is only used to get data from the User MongoDB collection to display the list of current users in an options loop of the admin component. When data is sent to the route, it returns the variable *userData* which is the contents of the *user* collection from MongoDB.
 This route requires no special parameters, only a request to be sent to it for it to return the user data.
+
+#### /api/user
+This route is only used to get a single user's data from the User MongoDB Collection to display the list of current users in an options loop of the admin component. When data is sent to the route, it returns all of the User's  data
+This route only requires that is sent a username. It is used for getting the *imagepath* of a user.
 
 ### Group Routes
 #### /api/groupreg
@@ -70,7 +91,7 @@ To delete a group, this route must be used. It takes the parameter of the group'
 
 
 #### /api/groups
-This provided route is only used to get data from the Group JSON database to display the list of current groups in an options loop of the admin component. When data is sent to the route, it returns the variable *groupData* which is the contents of the *groups* collection of MongoDB.
+This provided route is only used to get data from the Group MongoDB collection to display the list of current groups in an options loop of the admin component. When data is sent to the route, it returns the variable *groupData* which is the contents of the *groups* collection of MongoDB.
 This route requires no special parameters, only a request to be sent to it for it to return the user data.
 
 ### Image routes

@@ -33,10 +33,12 @@ export class ChatComponent implements OnInit {
 
 		this.username = sessionStorage.username;
 
-		const req = this.http.post('http://localhost:3000/api/users', {})
+		const req = this.http.post('http://localhost:3000/api/user', {
+			username: this.username
+		})
 			.subscribe((data: any) => {
-					if (data.userData) {
-						this.imagepath = data.userData[0].imagepath;
+					if (data.imagepath) {
+						this.imagepath = data.imagepath;
 						console.log(this.imagepath);
 					} else {
 						alert('Error!');
@@ -48,6 +50,8 @@ export class ChatComponent implements OnInit {
 					console.log("Error occured");
 					return;
 				});
+			//	let date = new Date();
+			//		this.socketService.sendMessage(' (' + this.username + ') - Has joined at ' + date.getHours() + ':' + date.getMinutes());
 	}
 
 	sendMessage() {

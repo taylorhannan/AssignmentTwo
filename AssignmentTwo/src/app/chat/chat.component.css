@@ -1,3 +1,14 @@
+#chatcontainer {
+  background-color: #42617f;
+  display: inline-block;
+  padding-top: 0px;
+  padding: 5px;
+}
+
+#chanchat {
+  display: table;
+}
+
 #messages {
   background-color: #ff9000;
   display: inline-block;
@@ -6,9 +17,20 @@
 
 #chat {
   background-color: #5883ad;
-  display: inline-block;
   padding: 10px;
-  opacity: 1;
+  margin:10px;
+  float: none;
+  display: table-cell;
+  vertical-align: top;
+}
+
+#channels {
+  background-color: #5883ad;
+  padding: 10px;
+  margin:10px;
+  float: none;
+  display: table-cell;
+  vertical-align: top;
 }
 
 .dummySpace {

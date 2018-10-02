@@ -1,20 +1,31 @@
-<div id="chat">
-  <h2>Chat</h2>
-  <div id ="messages">
-    <ng-container *ngFor="let message of messages">
-      <div id="message">
-       <img width="25px" height="25px" src="http://localhost:3000/images/{{imagepath}} "/>
-       {{message.text}}
+<div id="chatcontainer">
+  <div id="chanchat">
+    <div id="channels">
+      <h2>Channels</h2>
+      <p>Channel 1</p>
+    </div>
+    <div class="cellSpace">
+      <p class="dummySpace">.....</p>
+    </div>
+    <div id="chat">
+      <h2>Chat</h2>
+      <div id ="messages">
+        <ng-container *ngFor="let message of messages">
+          <div id="message">
+           <img width="25px" height="25px" src="http://localhost:3000/images/{{imagepath}} " alt="{{imagepath}}"/>
+           {{message.text}}
+          </div>
+        </ng-container>
       </div>
-    </ng-container>
-  </div>
 
-  <div>
-    <form (submit)="sendMessage()">
-      <input name="message" [(ngModel)]="message" placeholder="Type message here.." type="text" #newMessage>
       <div>
-        <button type="submit">Send</button>
+        <form (submit)="sendMessage()">
+          <input name="message" [(ngModel)]="message" placeholder="Type message here.." type="text" #newMessage>
+          <div>
+            <button type="submit">Send</button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>

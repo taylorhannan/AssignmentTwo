@@ -82,6 +82,7 @@ MongoClient.connect(url, {poolSize:10}, function(err, client) {
 		require('./routes/del.js')(app, db);
 		require('./routes/groupdel.js')(app, db);
 		require('./routes/users.js')(app, db);
+		require('./routes/user.js')(app, db);
 		require('./routes/groups.js')(app, db);
 		require('./routes/userimage.js')(app, db);
 		require('./routes/upload.js')(app,formidable);

@@ -3,6 +3,7 @@ module.exports = function(app, io) {
 
   io.on('connection', (socket) => {
     console.log('user connection');
+    io.emit('message', {type:'new-message', text: 'User Connected'});
 
     socket.on('disconnection', function() {
       console.log('user disconnection');
